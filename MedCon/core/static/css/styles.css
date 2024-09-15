@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+    background-color: rgb(221, 165, 165);
+}
+
+.navbar brand {
+    margin-right: 16px; /* Add space to the right of the image */
+}
+
+.navbar .navbar-links flex-1 flex justify-center {
+    flex-grow: 1; /* Make the text take up available space */
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

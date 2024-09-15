@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+      <!-- Profile Section -->
+      <div style="flex: 1; max-width: 33%; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 24px;">
+        <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 16px;">Profile</h2>
+        <img src="{% static 'img/mc2.jpeg' %}" alt="Profile Image" style="width: 96px; height: 96px; border-radius: 50%; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 12px;">{{ user.username }}</h3>
+        <p style="color: #718096; margin-bottom: 16px;">{{ user.bio }}</p>
+        <ul style="list-style: none; padding: 0; margin-bottom: 16px;">
+          <li style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+            <span style="color: #718096;">Joined:</span> {{ user.date_joined }}
+          </li>
+          <li style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+            <span style="color: #718096;">Posts:</span> {{ user.post_count }}
+          </li>
+          <li style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+            <span style="color: #718096;">Followers:</span> {{ user.follower_count }}
+          </li>
+          <li style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+            <span style="color: #718096;">Following:</span> {{ user.following_count }}
+          </li>
+        </ul>
+        {% if user == request.user %}
+          <a href="{% url 'profile' %}" style="display: inline-block; padding: 12px 24px; background-color: #3182ce; color: white; border-radius: 4px; text-decoration: none;">Edit Profile</a>
+        {% endif %}
+      </div>
+
+      <!-- Posts Section -->
+      <div style="flex: 1; max-width: 33%; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 24px;">
+        <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 16px;">Posts</h2>
+        <ul style="list-style: none; padding: 0;">
+          {% for post in user.posts %}
+            <li style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
+              <a href="{% url 'post_detail' post.id %}" style="color: #718096; text-decoration: none; transition: color 0.2s ease;">
+                {{ post.content }}
+              </a>
+            </li>
+          {% empty %}
+            <li style="padding: 12px 0; color: #718096;">No posts yet!</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
